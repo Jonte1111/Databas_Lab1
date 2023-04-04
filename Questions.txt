@@ -1,0 +1,10 @@
+12. how many suppliers in London supply cams? 
+13. where do suppliers in London get bolts from? 
+14. what is the total quantity of parts supplied by Jones? 
+15. colors for parts supplied by Smith 
+16. what is the quantity of blue parts supplied by each supplier? 
+17. the names of the London suppliers supplying 200 or more parts outside of London 
+18. the quantity of each part supplied locally in each city and list alphabetically by city 
+19. of which parts are there more than 500? 
+20. all pairs of supplier numbers such that the two suppliers concerned are not colocated 
+21. a table giving the average weight of each part supplied, by part name
