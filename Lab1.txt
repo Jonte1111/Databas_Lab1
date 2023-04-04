@@ -1,0 +1,122 @@
+--Query 12
+SELECT
+    COUNT(
+        DISTINCT s.snr,
+        s.city,
+        p.PNR,
+        p.PNAME
+    )
+FROM
+    Suppliers s,
+    Parts p
+INNER JOIN Shipments ON p.PNR = Shipments.PNR
+WHERE
+    s.city = 'London' AND p.PNAME = 'Cam'
+--Query 13
+SELECT DISTINCT
+    p.CITY
+FROM
+    Suppliers s
+INNER JOIN Shipments sh ON
+    s.snr = sh.SNR
+INNER JOIN Parts p ON
+    sh.PNR = p.PNR AND s.city IN('London') AND p.PNAME IN('Bolt')
+--Query 14
+SELECT
+    SUM(QTY)
+FROM
+    Suppliers s
+INNER JOIN Shipments sh ON
+    sh.SNR = s.snr
+WHERE
+    sname IN('Jones')
+--Query 15
+SELECT
+    DISTINCT p.COLOR
+FROM
+    Suppliers s
+INNER JOIN Shipments sh ON
+    sh.SNR = s.snr
+INNER JOIN Parts p ON sh.PNR = p.PNR
+WHERE
+    sname IN('Smith')
+--Query 16
+SELECT
+    s.sname,
+    SUM(sh.QTY)
+FROM
+    Parts p
+INNER JOIN Shipments sh ON
+    sh.PNR = p.PNR
+INNER JOIN Suppliers s ON
+    sh.SNR = s.snr
+WHERE
+    p.COLOR IN('Blue')
+GROUP BY
+    s.sname
+--Query 17
+SELECT
+    s.sname,
+    SUM(sh.QTY)
+FROM
+    Suppliers s
+INNER JOIN Shipments sh ON
+    sh.SNR = s.snr
+INNER JOIN Parts p ON
+    sh.PNR = p.PNR
+WHERE
+    s.city = 'London' AND p.CITY != 'London'
+GROUP BY
+    s.sname
+HAVING
+    SUM(sh.QTY) >= 200
+--Query 18
+SELECT
+    p.PNR,
+    p.PNAME,
+    p.CITY,
+    SUM(sh.QTY)
+FROM
+    Parts p
+INNER JOIN Shipments sh ON
+    sh.PNR = p.PNR
+INNER JOIN Suppliers s ON
+    sh.SNR = s.snr
+WHERE
+    s.city = p.CITY
+GROUP BY
+    p.PNAME
+ORDER BY
+    p.CITY ASC
+--Query 19
+SELECT
+    sh.PNR,
+    p.PNAME,
+    SUM(sh.QTY)
+FROM
+    Shipments sh
+INNER JOIN Parts p ON
+    sh.PNR = p.PNR
+GROUP BY
+    sh.PNR
+HAVING
+    SUM(sh.QTY) > 500
+--Query 20
+SELECT
+    s.snr,
+    s2.snr
+FROM
+    Suppliers s
+CROSS JOIN Suppliers s2 WHERE
+    s.city != s2.city
+--Query 21
+SELECT
+    p.PNAME,
+    CAST(AVG(p.WEIGHT) AS INT)
+FROM
+    Parts p
+INNER JOIN Shipments sh ON
+    sh.pnr = p.PNR
+GROUP BY
+    p.PNAME
+
